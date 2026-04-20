@@ -5,13 +5,13 @@ import (
 )
 
 type Mailer struct {
-	Factory MailerAdapter
-	Config  *MailerConfig
+	MailerAdapter
+	Config *MailerConfig
 }
 
 func (m *Mailer) Send(ctx context.Context, opts ...MailOpt) error {
 	mail := mailOpts(opts).Create()
-	a, err := m.Factory.NewMail(ctx)
+	a, err := m.NewMail(ctx)
 	if err != nil {
 		return err
 	}
