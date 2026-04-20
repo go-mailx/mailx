@@ -2,24 +2,25 @@ package main
 
 import (
 	"context"
-	"log"
+	"log/slog"
 	"net/mail"
 
 	"github.com/go-mailx/mailx"
-	"github.com/go-mailx/mailx-ses"
+	ses "github.com/go-mailx/mailx-ses"
 )
 
 func main() {
 	ctx := context.Background()
 
 	// NewFromContext loads AWS config from environment variables, ~/.aws/config, or IAM role.
-	factory, err := ses.NewFromContext(ctx)
+	adapter, err := ses.NewFromContext(ctx)
 	if err != nil {
-		log.Fatal(err)
+		slog.Error("failed to create SES adapter", "err", err)
+		return
 	}
 
 	mailer := mailx.Mailer{
-		Factory: factory,
+		MailerAdapter: adapter,
 		Config: &mailx.MailerConfig{
 			FromAddressSrc: []mailx.FromAddressFunc{
 				mailx.MailOverrideFromAddress(),
@@ -37,8 +38,9 @@ func main() {
 		mailx.TextBody("Hello!\n\nThis is a test email sent via Amazon SES."),
 	)
 	if err != nil {
-		log.Fatal(err)
+		slog.Error("failed to send email", "err", err)
+		return
 	}
 
-	log.Println("Email sent successfully")
+	slog.Info("email sent successfully")
 }

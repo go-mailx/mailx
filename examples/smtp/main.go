@@ -2,30 +2,30 @@ package main
 
 import (
 	"context"
-	"log"
+	"log/slog"
 	"net/mail"
 
 	"github.com/go-mailx/mailx"
-	"github.com/go-mailx/mailx-smtp"
-	gomail "github.com/wneessen/go-mail"
+	smtp "github.com/go-mailx/mailx-smtp"
 )
 
 func main() {
 	ctx := context.Background()
 
-	factory, err := smtp.New(smtp.Config{
+	adapter, err := smtp.New(smtp.Config{
 		Host:      "smtp.example.com",
 		Port:      587,
 		Username:  "user@example.com",
 		Password:  "secret",
-		TLSPolicy: gomail.TLSOpportunistic,
+		TLSPolicy: smtp.TLSOpportunistic,
 	})
 	if err != nil {
-		log.Fatal(err)
+		slog.Error("failed to create SMTP adapter", "err", err)
+		return
 	}
 
 	mailer := mailx.Mailer{
-		Factory: factory,
+		MailerAdapter: adapter,
 		Config: &mailx.MailerConfig{
 			FromAddressSrc: []mailx.FromAddressFunc{
 				mailx.MailOverrideFromAddress(),
@@ -42,8 +42,9 @@ func main() {
 		mailx.TextBody("Hello!\n\nThis is a test email sent via SMTP."),
 	)
 	if err != nil {
-		log.Fatal(err)
+		slog.Error("failed to send email", "err", err)
+		return
 	}
 
-	log.Println("Email sent successfully")
+	slog.Info("email sent successfully")
 }
