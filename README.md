@@ -20,7 +20,7 @@ See [`pkg.go.dev/github.com/go-mailx/mailx`](https://pkg.go.dev/github.com/go-ma
 
 ## Adapters
 
-| Module | Transport |
-|---|---|
-| [`github.com/go-mailx/mailx-smtp`](../smtp) | SMTP via [go-mail](https://github.com/wneessen/go-mail) |
-| [`github.com/go-mailx/mailx-ses`](../ses) | AWS SES via [aws-sdk-go-v2](https://github.com/aws/aws-sdk-go-v2) |
+| Module                                                                     | Transport                                                         |
+| -------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| [`github.com/go-mailx/mailx-smtp`](https://github.com/go-mailx/mailx-smtp) | SMTP via [go-mail](https://github.com/wneessen/go-mail)           |
+| [`github.com/go-mailx/mailx-ses`](https://github.com/go-mailx/mailx-ses)   | AWS SES via [aws-sdk-go-v2](https://github.com/aws/aws-sdk-go-v2) |
