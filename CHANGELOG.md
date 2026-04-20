@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.1](https://github.com/go-mailx/mailx/compare/v1.0.0...v1.0.1) (2026-04-20)
+
+
+### Docs
+
+* add readme ([93cf2a4](https://github.com/go-mailx/mailx/commit/93cf2a411eaaa578fd7be039dd0cd5ca0d2fa32a))
+* fix readme links ([b0531a6](https://github.com/go-mailx/mailx/commit/b0531a6f529c6b218af13d8162ea79d97d5714f7))
+* update examples ([91238db](https://github.com/go-mailx/mailx/commit/91238db1afb8cfb0be549628fe2ac6d6b04569fe))
+
 ## 1.0.0 (2026-04-20)
 
 
