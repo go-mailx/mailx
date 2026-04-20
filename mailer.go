@@ -21,11 +21,15 @@ func (m *Mailer) Send(ctx context.Context, opts ...MailOpt) error {
 	if err := a.To(mail.To); err != nil {
 		return err
 	}
-	if err := a.Bcc(mail.Bcc); err != nil {
-		return err
+	if len(mail.Bcc) > 0 {
+		if err := a.Bcc(mail.Bcc); err != nil {
+			return err
+		}
 	}
-	if err := a.ReplyTo(mail.ReplyTo); err != nil {
-		return err
+	if mail.ReplyTo != "" {
+		if err := a.ReplyTo(mail.ReplyTo); err != nil {
+			return err
+		}
 	}
 	if err := a.Subject(mail.Subject); err != nil {
 		return err
