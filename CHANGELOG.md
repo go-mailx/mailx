@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.1.0](https://github.com/go-mailx/mailx/compare/v1.0.2...v1.1.0) (2026-11-04)
+
+
+### Features
+
+* support inline attachments referenced by Content-ID ([#8](https://github.com/go-mailx/mailx/issues/8)) ([c041e8f](https://github.com/go-mailx/mailx/commit/c041e8f65c1115198b715607f45c2dbb68a86e1b))
+
+
+### Other
+
+* Configure Renovate ([#4](https://github.com/go-mailx/mailx/issues/4)) ([bd7bda3](https://github.com/go-mailx/mailx/commit/bd7bda3e5fe7209d3547cbb45aa31704f0ad18f1))
+* **deps:** update googleapis/release-please-action action to v5 ([#7](https://github.com/go-mailx/mailx/issues/7)) ([799d7dc](https://github.com/go-mailx/mailx/commit/799d7dcebee62845be0efe40dac6c5fd0c7e0e70))
+
+
+### Docs
+
+* add CODEOWNERS ([bc66cb2](https://github.com/go-mailx/mailx/commit/bc66cb2f7c4748c045ac6584360c810f50cc069b))
+
 ## [1.0.2](https://github.com/go-mailx/mailx/compare/v1.0.1...v1.0.2) (2026-04-20)
 
 
