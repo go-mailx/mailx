@@ -14,6 +14,16 @@ type Mail struct {
 	Subject      string
 	HtmlBodyFunc func() (string, error)
 	TextBodyFunc func() (string, error)
+
+	InlineAttachments []InlineAttachment
+}
+
+// InlineAttachment is a file embedded in the mail, typically an image that the
+// HTML body references by its Content-ID, e.g. <img src="cid:logo">.
+type InlineAttachment struct {
+	ContentID   string // referenced from HTML as "cid:<ContentID>", without angle brackets
+	ContentType string // e.g. "image/png"
+	Data        []byte
 }
 
 type MailOpt func(mail *Mail)
@@ -67,6 +77,18 @@ func HtmlBodyTemplate(tmpl *template.Template, data any) MailOpt {
 func TextBody(body string) MailOpt {
 	return func(mail *Mail) {
 		mail.TextBodyFunc = func() (string, error) { return body, nil }
+	}
+}
+
+// Inline embeds data in the mail so that the HTML body can reference it as
+// "cid:<contentID>". The adapter must implement [InlineAttachmentAdder].
+func Inline(contentID, contentType string, data []byte) MailOpt {
+	return func(mail *Mail) {
+		mail.InlineAttachments = append(mail.InlineAttachments, InlineAttachment{
+			ContentID:   contentID,
+			ContentType: contentType,
+			Data:        data,
+		})
 	}
 }
 
