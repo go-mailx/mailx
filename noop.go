@@ -15,4 +15,7 @@ func (n *Noop) Subject(string) error       { return nil }
 func (n *Noop) TextBody(string) error      { return nil }
 func (n *Noop) To([]string) error          { return nil }
 
+func (n *Noop) AddInlineAttachment(InlineAttachment) error { return nil }
+
 var _ MailerAdapter = (*Noop)(nil)
+var _ InlineAttachmentAdder = (*Noop)(nil)

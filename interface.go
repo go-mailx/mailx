@@ -18,3 +18,10 @@ type MailInstance interface {
 	TextBody(string) error
 	Send(context.Context) error
 }
+
+// InlineAttachmentAdder may be implemented by a MailInstance that supports
+// inline attachments. Mailer.Send returns ErrInlineAttachmentsNotSupported
+// for a mail with inline attachments if the instance does not implement it.
+type InlineAttachmentAdder interface {
+	AddInlineAttachment(InlineAttachment) error
+}

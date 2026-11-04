@@ -14,6 +14,21 @@ go get github.com/go-mailx/mailx
 
 See the [examples](https://github.com/go-mailx/mailx/tree/main/examples) directory for working examples with each adapter.
 
+### Inline images
+
+Images can be embedded in the mail and referenced from the HTML body by their Content-ID. Unlike `data:` URLs, this is rendered by Gmail web and mobile.
+
+```go
+err := mailer.Send(ctx,
+	mailx.To("user@example.com"),
+	mailx.Subject("Welcome"),
+	mailx.HtmlBody(`<img src="cid:logo" alt="Logo">`),
+	mailx.Inline("logo", "image/png", logoPNG),
+)
+```
+
+The Content-ID is given without angle brackets and must be unique within the mail. Inline attachments require an adapter whose `MailInstance` implements `mailx.InlineAttachmentAdder`; otherwise `Send` returns `mailx.ErrInlineAttachmentsNotSupported` instead of sending a mail with broken images.
+
 ## API
 
 See [`pkg.go.dev/github.com/go-mailx/mailx`](https://pkg.go.dev/github.com/go-mailx/mailx) for all message options, `MailerConfig`, and `FromAddressFunc` built-ins.
